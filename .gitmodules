@@ -1,0 +1,3 @@
+[submodule "ccli"]
+	path = ccli
+	url = git@github.com:mebiusashan/ccli.git
