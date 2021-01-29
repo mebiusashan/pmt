@@ -6,6 +6,8 @@
 #include <stdio.h>
 #include "workspace.h"
 
+char *dir = NULL;
+
 void
 create_workspace(char *dir)
 {
@@ -25,6 +27,9 @@ create_workspace(char *dir)
 char*
 get_workspace()
 {
+    if(dir!=NULL){
+        return dir;
+    }
         uid_t uid = getuid();
         struct passwd *pw = getpwuid(uid);
 
@@ -32,7 +37,7 @@ get_workspace()
                 printf("Unable to get user directory\n");
                 exit(1);
         }
-        char *dir = (char *)malloc(sizeof(pw->pw_dir)+sizeof(PMT_DIR)+1);
+        dir= (char *)malloc(sizeof(pw->pw_dir)+sizeof(PMT_DIR)+1);
         strcpy(dir, pw->pw_dir);
         strcat(dir, "/");
         strcat(dir, PMT_DIR);
