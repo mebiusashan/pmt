@@ -65,7 +65,7 @@ int main()
     //printf("num is : %d\n", add());
     //printf("num is : %d\n", add());
     
-    printf("%s,\n", get_workspace());
+    printf("%d,\n", get_cclid_pid());
 
     int curLen = 16*1;
         int add_g =(55+1 - 55%curLen )/16;

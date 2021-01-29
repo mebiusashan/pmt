@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
+#include <fcntl.h>
 #include "workspace.h"
 
 char *dir = NULL;
@@ -37,11 +38,32 @@ get_workspace()
                 printf("Unable to get user directory\n");
                 exit(1);
         }
-        dir= (char *)malloc(sizeof(pw->pw_dir)+sizeof(PMT_DIR)+1);
+        dir= (char *)malloc(sizeof(pw->pw_dir)+sizeof(PMT_DIR)+2);
         strcpy(dir, pw->pw_dir);
         strcat(dir, "/");
         strcat(dir, PMT_DIR);
+        strcat(dir, "/");
         create_workspace(dir);
         return dir;
 }
 
+pid_t
+get_cclid_pid()
+{
+    char *wdir = get_workspace();
+    int len = strlen(wdir)+sizeof(PMT_PID_NAME);
+    char *pid_file = malloc(len);
+    strcpy(pid_file, wdir);
+    strcat(pid_file, PMT_PID_NAME);
+    if(access(pid_file, F_OK|R_OK)==0){
+        int fp = open(pid_file, O_RDONLY);
+        char buf[1024];
+        memset(buf, 0, sizeof(buf));
+        while(read(fp, buf, sizeof(buf) - 1) > 0) {
+                memset(buf, 0, sizeof(buf));
+        }
+        close(fp);
+        return (pid_t)atoi(buf);
+    }
+    return 0;
+}
