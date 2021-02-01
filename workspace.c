@@ -56,14 +56,36 @@ get_cclid_pid()
     strcpy(pid_file, wdir);
     strcat(pid_file, PMT_PID_NAME);
     if(access(pid_file, F_OK|R_OK)==0){
-        int fp = open(pid_file, O_RDONLY);
+        FILE *fp = fopen(pid_file, "r");
         char buf[1024];
-        memset(buf, 0, sizeof(buf));
-        while(read(fp, buf, sizeof(buf) - 1) > 0) {
-                memset(buf, 0, sizeof(buf));
-        }
-        close(fp);
+        fscanf(fp, "%s", buf);
+        fclose(fp);
+        free(pid_file);
+        printf("%s\n", buf);
         return (pid_t)atoi(buf);
     }
+    free(pid_file);
+    return 0;
+}
+
+int
+set_cclid_pid(pid_t pid)
+{
+    char *wdir = get_workspace();
+     int len = strlen(wdir)+sizeof(PMT_PID_NAME);
+    char *pid_file = malloc(len);
+    strcpy(pid_file, wdir);
+    strcat(pid_file, PMT_PID_NAME);
+    printf( "%s\n", pid_file);
+    int fd = open(pid_file, O_WRONLY|O_CREAT, PMT_DIR_PMODE);
+    if(fd == -1) {
+         free(pid_file);
+         return 1;
+    }
+    char pidstr[256];
+    sprintf(pidstr, "%d", pid);
+    write(fd, pidstr, strlen(pidstr));
+    free(pid_file);
+    close(fd);
     return 0;
 }
