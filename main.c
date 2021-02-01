@@ -8,9 +8,7 @@
 #include <time.h>
 #include <syslog.h>
 #include <fcntl.h>
- 
-#include "workspace.h"
-#include "daemon.h"
+#include "pmt.h"
  
 int init_daemon(void) 
 { 
@@ -62,10 +60,10 @@ int init_daemon(void)
      return num++;
  }
 #include "ccli/ccli.h"
- 
+
 int main(int argc, const char **argv )
 { 
-    cmd_t root = set_root_cmd ( "pmt","PMT is a production process manager.","PMT is a production process manager.", "Use 'pmt [command] --help' for more information about a command.", NULL );
+    cmd_t root = set_root_cmd ( "pmt","PMT is a process manage tool.","PMT is a process manage tool.", "Use 'pmt [command] --help' for more information about a command.", NULL );
     ccli_r ( root, argc, argv );
     //printf("num is : %d\n", add());
     //printf("num is : %d\n", add());
