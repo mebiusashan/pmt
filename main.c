@@ -61,8 +61,12 @@ int init_daemon(void)
  int add(){
      return num++;
  }
-int main() 
+#include "ccli/ccli.h"
+ 
+int main(int argc, const char **argv )
 { 
+    cmd_t root = set_root_cmd ( "pmt","PMT is a production process manager.","PMT is a production process manager.", "Use 'pmt [command] --help' for more information about a command.", NULL );
+    ccli_r ( root, argc, argv );
     //printf("num is : %d\n", add());
     //printf("num is : %d\n", add());
     int rel = set_cclid_pid(1123);
