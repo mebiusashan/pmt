@@ -10,6 +10,7 @@
 #include <fcntl.h>
  
 #include "workspace.h"
+#include "daemon.h"
  
 int init_daemon(void) 
 { 
@@ -65,7 +66,7 @@ int main()
     //printf("num is : %d\n", add());
     //printf("num is : %d\n", add());
     int rel = set_cclid_pid(1123);
-    printf("%d  :: %d --,\n", rel , get_cclid_pid());
+    printf("%d  :: %d -- %d ,\n", rel , get_cclid_pid(), get_cclid_status((pid_t)9953));
 
     int curLen = 16*1;
         int add_g =(55+1 - 55%curLen )/16;

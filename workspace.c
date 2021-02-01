@@ -61,7 +61,6 @@ get_cclid_pid()
         fscanf(fp, "%s", buf);
         fclose(fp);
         free(pid_file);
-        printf("%s\n", buf);
         return (pid_t)atoi(buf);
     }
     free(pid_file);
@@ -76,7 +75,6 @@ set_cclid_pid(pid_t pid)
     char *pid_file = malloc(len);
     strcpy(pid_file, wdir);
     strcat(pid_file, PMT_PID_NAME);
-    printf( "%s\n", pid_file);
     int fd = open(pid_file, O_WRONLY|O_CREAT, PMT_DIR_PMODE);
     if(fd == -1) {
          free(pid_file);
