@@ -4,5 +4,6 @@
 
 #include "workspace.h"
 #include "daemon.h"
+#include "command.h"
 
 #endif 
