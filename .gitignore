@@ -53,3 +53,4 @@ dkms.conf
 .kdev4/
 pmt.kdev4
 build/
+cmake-build-debug/
