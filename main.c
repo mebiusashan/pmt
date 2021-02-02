@@ -64,6 +64,15 @@ int init_daemon(void)
 int main(int argc, const char **argv )
 { 
     cmd_t root = set_root_cmd ( "pmt","PMT is a process manage tool.","PMT is a process manage tool.", "Use 'pmt [command] --help' for more information about a command.", NULL );
+    cmd_t start = set_sub_cmd( root, "start","PMT is a process manage tool.","start and daemonize an app", "Use 'pmt [command] --help' for more information about a command.", NULL );
+    cmd_t restart = set_sub_cmd( root, "restart","PMT is a process manage tool.","restart a process", "Use 'pmt [command] --help' for more information about a command.", NULL );
+    cmd_t stop = set_sub_cmd( root, "stop","PMT is a process manage tool.","stop a process", "Use 'pmt [command] --help' for more information about a command.", NULL );
+    cmd_t ls = set_sub_cmd( root, "ls","list all processes","list all processes", "Use 'pmt [command] --help' for more information about a command.", NULL );
+    cmd_t monit = set_sub_cmd( root, "monit","PMT is a process manage tool.","launch termcaps monitoring", "Use 'pmt [command] --help' for more information about a command.", NULL );
+    cmd_t examples = set_sub_cmd( root, "examples","PMT is a process manage tool.","display pmt usage examples", "Use 'pmt [command] --help' for more information about a command.", NULL );
+    cmd_t version = set_sub_cmd( root, "version","PMT is a process manage tool.","print pmt version", "Use 'pmt [command] --help' for more information about a command.", NULL );
+
+
     ccli_r ( root, argc, argv );
     //printf("num is : %d\n", add());
     //printf("num is : %d\n", add());
